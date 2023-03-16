@@ -59,6 +59,7 @@ export default class App extends React.Component {
             })
     }
     editSave = (id) => {
+        console.log(id)
         this.setState(() =>
             this.state.toDoList.find((itm) => itm.id === id).editable = false
         )
@@ -73,7 +74,7 @@ export default class App extends React.Component {
                     addBtn={this.btnClicked}
                     title='To Do List'/>
                 <ToDoList toDoList={this.state.toDoList} toDoDelete={this.toDoDelete} toDoEdit={this.toDoEdit}
-                          OnToDoEdit={this.OnToDoEdit}/>
+                          OnToDoEdit={this.OnToDoEdit} editSave={this.editSave}/>
             </div>
         );
     }

@@ -8,7 +8,7 @@ export default class ToDoList extends React.Component {
             <>
                 {this.props.toDoList.map((item) => {
                     return (
-                        <ToDoItem toDoList={this.props.toDoList} toDo={item} key={item.id} toDoDelete={this.props.toDoDelete} toDoEdit={this.props.toDoEdit} OnToDoEdit={this.props.OnToDoEdit}/>
+                        <ToDoItem toDoList={this.props.toDoList} toDo={item} key={item.id} toDoDelete={this.props.toDoDelete} toDoEdit={this.props.toDoEdit} OnToDoEdit={this.props.OnToDoEdit} editSave={this.props.editSave}/>
                     );
                 })}
             </>
