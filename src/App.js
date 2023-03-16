@@ -91,6 +91,8 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
+                <p>{this.state.filterByChecked ? 'Filtered By Checked' : ''}</p>
+                <p>{this.state.filterByUnChecked ? 'Filtered By Un-Checked' : ''}</p>
                 <Header
                     toDoName={this.state.toDoName}
                     onToDoChange={this.onToDoChange}
@@ -98,7 +100,7 @@ export default class App extends React.Component {
                     title='To Do List'/>
                 <ToDoList toDoList={this.state.toDoList} toDoDelete={this.toDoDelete} toDoEdit={this.toDoEdit}
                           OnToDoEdit={this.OnToDoEdit} editSave={this.editSave} toDoCheckbox={this.toDoCheckbox}
-                          filterByChecked={this.state.filterByChecked} filterByUnChecked={this.state.filterByUnChecked}/>
+                          filterByChecked={this.state.filterByChecked} filterByUnChecked={this.state.filterByUnChecked}/><br/>
                 <button onClick={this.handleFilterByChecked}>Filter By Checked</button> <button onClick={this.handleFilterByUnChecked}>Filter By Unchecked</button>
             </div>
         );
