@@ -8,16 +8,20 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             toDoName: "",
+            filterByChecked : false,
+            filterByUnChecked : false,
             toDoList: [
                 {
                     name: "Wash the Car",
                     id: v4(),
-                    editable: false
+                    editable: false,
+                    checkStatus: true
                 },
                 {
                     name: "Pay Bills",
                     id: v4(),
-                    editable: false
+                    editable: false,
+                    checkStatus: false
                 },
             ],
         };
@@ -30,7 +34,7 @@ export default class App extends React.Component {
     };
     btnClicked = () => {
         this.setState({
-            toDoList: [...this.state.toDoList, {name: this.state.toDoName, id: v4(), editable: false}],
+            toDoList: [...this.state.toDoList, {name: this.state.toDoName, id: v4(), editable: false, checkStatus: false}],
             toDoName: ""
         });
     };
@@ -59,10 +63,29 @@ export default class App extends React.Component {
             })
     }
     editSave = (id) => {
-        console.log(id)
         this.setState(() =>
             this.state.toDoList.find((itm) => itm.id === id).editable = false
         )
+    }
+    toDoCheckbox = (id) => {
+        this.setState(
+            {
+                toDoList: this.state.toDoList.map((itm) => {
+                    if (itm.id === id) {
+                        return {
+                            ...itm,
+                            checkStatus : !this.state.toDoList.find((itm) => itm.id === id).checkStatus
+                        }
+                    }
+                    return itm
+                }),
+            })
+    }
+    handleFilterByChecked = () => {
+        this.setState({filterByChecked : !this.state.filterByChecked})
+    }
+    handleFilterByUnChecked = () => {
+        this.setState({filterByUnChecked : !this.state.filterByUnChecked})
     }
 
     render() {
@@ -74,7 +97,9 @@ export default class App extends React.Component {
                     addBtn={this.btnClicked}
                     title='To Do List'/>
                 <ToDoList toDoList={this.state.toDoList} toDoDelete={this.toDoDelete} toDoEdit={this.toDoEdit}
-                          OnToDoEdit={this.OnToDoEdit} editSave={this.editSave}/>
+                          OnToDoEdit={this.OnToDoEdit} editSave={this.editSave} toDoCheckbox={this.toDoCheckbox}
+                          filterByChecked={this.state.filterByChecked} filterByUnChecked={this.state.filterByUnChecked}/>
+                <button onClick={this.handleFilterByChecked}>Filter By Checked</button> <button onClick={this.handleFilterByUnChecked}>Filter By Unchecked</button>
             </div>
         );
     }

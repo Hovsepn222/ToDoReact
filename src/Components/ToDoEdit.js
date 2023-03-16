@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default class c extends React.Component {
+export default class ToDoEdit extends React.Component {
 
     render() {
         return (
