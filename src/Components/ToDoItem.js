@@ -1,21 +1,44 @@
 import ToDoDelete from "./ToDoDelete";
 import ToDoEdit from "./ToDoEdit";
 import ToDoCheckbox from "./ToDoCheckbox";
+import React from "react";
 
 
-const ToDoItem = (props) => {
-    return (
-        <div>{props.toDo.editable === true ? (<>
-            <input onChange={(e) => {props.OnToDoEdit(props.toDo.id, e.target.value)}} value={props.toDo.name}/>
-            <button onClick={() => props.editSave(props.toDo.id)}>Save</button></>
-            ) :
-            (<>
-                <div>{props.toDo.name}</div>
-                <ToDoCheckbox checkStatus={props.toDo.checkStatus} toDoCheckbox={props.toDoCheckbox} id={props.toDo.id} />
-            <ToDoDelete toDoDelete={props.toDoDelete} toDoList={props.toDoList} id={props.toDo.id}/>
-            <ToDoEdit toDoEdit={props.toDoEdit} toDoList={props.toDoList} id={props.toDo.id}/> </>)}
-        </div>
-    )
+export default class ToDoItem extends React.Component {
+    constructor(...args) {
+        super(...args);
+        this.state = {
+            tempEditValue : this.props.toDo.name
+    }
+
+    }
+
+    onEditValue = (e) => {
+        this.setState({tempEditValue : e})
+    }
+
+
+    render() {
+        return (
+            <div>{this.props.toDo.editable === true ? (<>
+                        <input onChange={(e) => {
+                            this.onEditValue(e.target.value)
+                        }} value={this.state.tempEditValue}/>
+                        <button onClick={() => {
+                            this.props.OnToDoEdit(this.props.toDo.id, this.state.tempEditValue);
+                        }}>Save</button>
+                        <button onClick={() => {this.props.cancelEdit(this.props.toDo.id)
+                        }}>Cancel</button>
+                    </>
+                ) :
+                (<>
+                    <div>{this.props.toDo.name}</div>
+                    <ToDoCheckbox checkStatus={this.props.toDo.checkStatus} toDoCheckbox={this.props.toDoCheckbox}
+                                  id={this.props.toDo.id}/>
+                    <ToDoDelete toDoDelete={this.props.toDoDelete} toDoList={this.props.toDoList} id={this.props.toDo.id}/>
+                    <ToDoEdit toDoEdit={this.props.toDoEdit} toDoList={this.props.toDoList}
+                              id={this.props.toDo.id}/> </>)}
+            </div>
+        )
+    }
 }
-
-export default ToDoItem

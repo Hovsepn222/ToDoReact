@@ -55,18 +55,28 @@ export default class App extends React.Component {
                     if (itm.id === id) {
                         return {
                             ...itm,
-                            name: value
+                            name: value,
+                            editable: false
                         }
                     }
                     return itm
                 }),
             })
     }
-    editSave = (id) => {
-        this.setState(() =>
-            this.state.toDoList.find((itm) => itm.id === id).editable = false
+    cancelEdit = (id) => {
+        this.setState({
+            toDoList: this.state.toDoList.map((itm) => {
+            if (itm.id === id) {
+                return {
+                    ...itm,
+                    editable: false
+                }
+            }
+            return itm}
         )
-    }
+    })};
+
+
     toDoCheckbox = (id) => {
         this.setState(
             {
@@ -100,6 +110,7 @@ export default class App extends React.Component {
                     title='To Do List'/>
                 <ToDoList toDoList={this.state.toDoList} toDoDelete={this.toDoDelete} toDoEdit={this.toDoEdit}
                           OnToDoEdit={this.OnToDoEdit} editSave={this.editSave} toDoCheckbox={this.toDoCheckbox}
+                          cancelEdit={this.cancelEdit}
                           filterByChecked={this.state.filterByChecked} filterByUnChecked={this.state.filterByUnChecked}/><br/>
                 <button onClick={this.handleFilterByChecked}>Filter By Checked</button> <button onClick={this.handleFilterByUnChecked}>Filter By Unchecked</button>
             </div>

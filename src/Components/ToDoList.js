@@ -19,6 +19,7 @@ export default class ToDoList extends React.Component {
                                     editSave={this.props.editSave}
                                     toDoCheckbox={this.props.toDoCheckbox}
                                     checkStatus={this.props.checkStatus}
+                                    cancelEdit={this.props.cancelEdit}
                                 />)
 
                     }
@@ -34,6 +35,7 @@ export default class ToDoList extends React.Component {
                                 editSave={this.props.editSave}
                                 toDoCheckbox={this.props.toDoCheckbox}
                                 checkStatus={this.props.checkStatus}
+                                cancelEdit={this.props.cancelEdit}
                             />)
                     }
                     // If No Filters are applied
@@ -48,6 +50,7 @@ export default class ToDoList extends React.Component {
                             editSave={this.props.editSave}
                             toDoCheckbox={this.props.toDoCheckbox}
                             checkStatus={this.props.checkStatus}
+                            cancelEdit={this.props.cancelEdit}
                         />
                     );}
                 })}
